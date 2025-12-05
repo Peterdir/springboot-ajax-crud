@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/main}">
+<head>
+  <title>Quản lý Video 🎬</title>
+</head>
+<body>
+<section layout:fragment="content" class="video-list">
+
+  <!-- === HEADER === -->
+  <div class="list-header">
+    <h2>Danh sách Video 🎬</h2>
+
+    <div class="actions">
+      <a th:href="@{/admin/videos/new}" class="btn-add">＋ Thêm mới</a>
+    </div>
+  </div>
+
+  <!-- === DANH SÁCH VIDEO === -->
+  <div class="video-container">
+    <table class="video-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Tiêu đề</th>
+          <th>Danh mục</th>
+          <th>Mô tả</th>
+          <th>Ngày tạo</th>
+          <th>Liên kết</th>
+          <th>Hành động</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="video : ${videos}">
+          <td th:text="${video.id}"></td>
+          <td th:text="${video.title}"></td>
+          <td>
+            <span th:if="${video.category != null}" th:text="${video.category.categoryName}"></span>
+            <span th:unless="${video.category != null}">Chưa phân loại</span>
+          </td>
+          <td th:text="${#strings.abbreviate(video.description, 40)}"></td>
+          <td th:text="${#dates.format(video.createdAt, 'dd/MM/yyyy HH:mm')}"></td>
+          <td>
+            <a th:href="${video.url}" target="_blank" class="btn-link">Xem</a>
+          </td>
+          <td class="action-buttons">
+            <a th:href="@{|/admin/videos/${video.id}/edit|}" class="btn btn-edit" title="Sửa">✏️</a>
+            <form th:action="@{|/admin/videos/${video.id}/delete|}" method="post" style="display:inline;">
+              <button type="submit" class="btn btn-delete"
+                      onclick="return confirm('Bạn có chắc muốn xóa video này không?');"
+                      title="Xóa">🗑️</button>
+            </form>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- === Nếu không có video === -->
+    <div class="no-data" th:if="${#lists.isEmpty(videos)}">
+      <p>Chưa có video nào được thêm.</p>
+    </div>
+  </div>
+
+</section>
+</body>
+</html>

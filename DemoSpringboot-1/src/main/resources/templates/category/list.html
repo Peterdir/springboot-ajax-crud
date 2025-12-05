@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/main}">
+<head>
+  <title>Quản lý danh mục</title>
+  <link rel="stylesheet" th:href="@{/css/list.css}">
+</head>
+<body>
+<section layout:fragment="content" class="category-list">
+
+  <!-- ====== HEADER ====== -->
+  <div class="page-header">
+    <h2><i class="fa fa-folder-open"></i> Quản lý danh mục</h2>
+    <div class="actions">
+      <form th:action="@{/admin/categories}" method="get" class="search-form">
+        <input type="text" name="q" th:value="${param.q}" placeholder="🔍 Tìm theo tên...">
+        <button type="submit">Tìm</button>
+      </form>
+      <a th:href="@{/admin/categories/new}" class="btn btn-add">+ Thêm mới</a>
+    </div>
+  </div>
+
+  <!-- ====== TABLE ====== -->
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Tên danh mục</th>
+          <th>Mô tả</th>
+          <th>Thao tác</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="c : ${page.content}">
+          <td th:text="${c.id}"></td>
+          <td th:text="${c.categoryName}"></td>
+          <td th:text="${c.description != null ? c.description : '—'}"></td>
+          <td class="actions">
+            <a th:href="@{'/admin/categories/' + ${c.id} + '/edit'}" class="btn btn-edit">Sửa</a>
+            <form th:action="@{'/admin/categories/' + ${c.id} + '/delete'}" method="post" style="display:inline">
+              <button type="submit" class="btn btn-delete"
+                      onclick="return confirm('Bạn có chắc muốn xóa danh mục này không?')">
+                Xóa
+              </button>
+            </form>
+          </td>
+        </tr>
+        <tr th:if="${#lists.isEmpty(page.content)}">
+          <td colspan="4" style="text-align:center;">Không có danh mục nào</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ====== PAGINATION ====== -->
+  <div class="pagination">
+    <a th:if="${!page.first}" th:href="@{|/admin/categories?page=${page.number-1}|}">&laquo; Trước</a>
+    <span>Trang <span th:text="${page.number + 1}"></span> / 
+          <span th:text="${page.totalPages}"></span></span>
+    <a th:if="${!page.last}" th:href="@{|/admin/categories?page=${page.number+1}|}">Sau &raquo;</a>
+  </div>
+
+</section>
+</body>
+</html>

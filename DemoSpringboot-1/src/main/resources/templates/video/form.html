@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/main}">
+<head>
+  <title th:text="${video.id != null ? 'Chỉnh sửa Video 🎬' : 'Thêm Video mới 🎬'}"></title>
+</head>
+<body>
+<section layout:fragment="content" class="video-form">
+
+  <div class="form-header">
+    <h2 th:text="${video.id != null ? 'Chỉnh sửa Video 🎬' : 'Thêm Video mới 🎬'}"></h2>
+    <a th:href="@{/admin/videos}" class="btn-back">← Quay lại</a>
+  </div>
+
+  <form th:action="@{/admin/videos}" th:object="${video}" method="post" class="form-box">
+    <input type="hidden" th:field="*{id}"/>
+
+    <!-- Tiêu đề -->
+    <div class="form-group">
+      <label for="title">🎞 Tiêu đề video</label>
+      <input type="text" th:field="*{title}" placeholder="Nhập tiêu đề video..." required />
+    </div>
+
+    <!-- URL -->
+    <div class="form-group">
+      <label for="url">🔗 Liên kết video (URL)</label>
+      <input type="url" th:field="*{url}" placeholder="https://example.com/video..." required />
+    </div>
+
+    <!-- Danh mục -->
+    <div class="form-group">
+      <label for="category">📁 Danh mục</label>
+      <select th:field="*{category}" required>
+        <option value="">-- Chọn danh mục --</option>
+        <option th:each="cat : ${categories}"
+                th:value="${cat.id}"
+                th:text="${cat.categoryName}"
+                th:selected="${video.category != null and cat.id == video.category.id}">
+        </option>
+      </select>
+    </div>
+
+    <!-- Mô tả -->
+    <div class="form-group">
+      <label for="description">📝 Mô tả</label>
+      <textarea th:field="*{description}" rows="4" placeholder="Nhập mô tả ngắn..."></textarea>
+    </div>
+
+    <!-- Nút hành động -->
+    <div class="form-actions">
+      <button type="submit" class="btn-save">💾 Lưu</button>
+      <a th:href="@{/admin/videos}" class="btn-cancel">Hủy</a>
+    </div>
+
+  </form>
+
+</section>
+</body>
+</html>

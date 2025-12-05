@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/main}">
+<head>
+  <title>Chỉnh sửa Video</title>
+  <style>
+    /* ==== FORM CONTAINER ==== */
+    .edit-container {
+      max-width: 700px;
+      margin: 60px auto;
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+      padding: 45px 50px;
+      animation: fadeIn 0.5s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ==== HEADING ==== */
+    .edit-container h2 {
+      font-size: 26px;
+      font-weight: 600;
+      color: #0062ff;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-bottom: 2px solid rgba(0, 98, 255, 0.15);
+      padding-bottom: 12px;
+      margin-bottom: 25px;
+    }
+
+    .edit-container h2::before {
+      content: "✏️";
+      font-size: 22px;
+    }
+
+    /* ==== LABELS & INPUTS ==== */
+    label.form-label {
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 6px;
+      display: block;
+    }
+
+    .form-control,
+    .form-select {
+      border-radius: 10px;
+      border: 1.5px solid #d4d8dc;
+      background-color: #fdfdfd;
+      transition: all 0.25s ease;
+      font-size: 15px;
+      padding: 10px 12px;
+    }
+
+    .form-control:focus,
+    .form-select:focus {
+      border-color: #00b4d8;
+      box-shadow: 0 0 6px rgba(0, 180, 216, 0.4);
+      background-color: #fff;
+    }
+
+    textarea.form-control {
+      resize: none;
+      min-height: 90px;
+    }
+
+    /* ==== BUTTONS ==== */
+    .edit-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 35px;
+    }
+
+    .btn {
+      border: none;
+      border-radius: 8px;
+      font-weight: 500;
+      transition: all 0.25s ease;
+      padding: 10px 22px;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: linear-gradient(90deg, #0062ff, #00b4d8);
+      color: #fff;
+      box-shadow: 0 3px 10px rgba(0, 98, 255, 0.25);
+    }
+
+    .btn-primary:hover {
+      background: linear-gradient(90deg, #0051d6, #0094c4);
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      background: #f1f3f5;
+      color: #333;
+      border: 1px solid #ccc;
+    }
+
+    .btn-secondary:hover {
+      background: #e9ecef;
+      transform: translateY(-1px);
+    }
+
+    /* ==== RESPONSIVE ==== */
+    @media (max-width: 768px) {
+      .edit-container {
+        padding: 30px 25px;
+        margin: 30px 15px;
+      }
+
+      .edit-actions {
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .btn {
+        width: 100%;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+<section layout:fragment="content" class="edit-section">
+  <div class="edit-container">
+    <h2>Chỉnh sửa Video</h2>
+
+    <form th:action="@{/admin/videos}" th:object="${video}" method="post">
+      <!-- Hidden ID -->
+      <input type="hidden" th:field="*{id}" />
+
+      <!-- Tiêu đề -->
+      <div class="mb-3">
+        <label class="form-label">Tiêu đề</label>
+        <input type="text" class="form-control" th:field="*{title}"
+               placeholder="Nhập tiêu đề video..." required>
+      </div>
+
+      <!-- Mô tả -->
+      <div class="mb-3">
+        <label class="form-label">Mô tả</label>
+        <textarea class="form-control" th:field="*{description}"
+                  placeholder="Nhập mô tả ngắn cho video..."></textarea>
+      </div>
+
+      <!-- URL video -->
+      <div class="mb-3">
+        <label class="form-label">URL video</label>
+        <input type="text" class="form-control" th:field="*{url}"
+               placeholder="https://example.com/video.mp4" required>
+      </div>
+
+      <!-- Danh mục -->
+      <div class="mb-3">
+        <label class="form-label">Danh mục</label>
+        <select class="form-select" name="categoryId">
+          <option value="">-- Chọn danh mục --</option>
+          <option th:each="c : ${categories}"
+                  th:value="${c.id}"
+                  th:text="${c.name}"
+                  th:selected="${video.category != null and video.category.id == c.id}">
+          </option>
+        </select>
+      </div>
+
+      <!-- Actions -->
+      <div class="edit-actions">
+        <a th:href="@{/admin/videos}" class="btn btn-secondary">← Quay lại</a>
+        <button type="submit" class="btn btn-primary">💾 Lưu thay đổi</button>
+      </div>
+    </form>
+  </div>
+</section>
+</body>
+</html>

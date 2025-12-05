@@ -1,0 +1,15 @@
+<div th:fragment="headerFrag" class="header">
+  <div class="header-container">
+    <div class="header-left">
+      <img th:src="@{/images/my-photo.jpg}" alt="Student" class="avatar">
+      <h1>Video Management System 🎬</h1>
+    </div>
+
+    <nav class="header-nav">
+      <a th:href="@{/}">Home</a>
+      <a th:href="@{/users}">Users</a>
+      <a th:href="@{/admin/categories}">Categories</a>
+      <a th:href="@{/admin/videos}">Videos</a>
+    </nav>
+  </div>
+</div>

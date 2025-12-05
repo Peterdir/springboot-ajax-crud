@@ -1,0 +1,431 @@
+/* === HEADER === */
+.header {
+  background: linear-gradient(90deg, #0062ff, #00b4d8);
+  color: white;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+.header-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 10px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.header h1 {
+  font-size: 20px;
+  margin: 0;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.avatar {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #fff;
+  box-shadow: 0 0 6px rgba(255, 255, 255, 0.6);
+}
+
+.header-nav {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+.header-nav a {
+  color: #fff;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.2s, border-bottom 0.2s;
+  padding-bottom: 2px;
+}
+
+.header-nav a:hover {
+  color: #ffe66d;
+  border-bottom: 2px solid #ffe66d;
+}
+
+/* === MAIN === */
+main {
+  flex: 1;
+  max-width: 1000px;
+  margin: 40px auto;
+  background: #fff;
+  padding: 35px 45px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+/* === HOME TEXT === */
+.home h2 {
+  font-size: 22px;
+  color: #0d6efd;
+  margin-bottom: 15px;
+}
+
+.home p {
+  font-size: 15px;
+  color: #444;
+  margin-bottom: 10px;
+}
+
+/* === FOOTER === */
+.footer {
+  text-align: center;
+  color: #fff;
+  font-size: 14px;
+  background: linear-gradient(90deg, #0062ff, #00b4d8);
+  border-top: 2px solid rgba(255, 255, 255, 0.2);
+  padding: 20px 10px;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.15);
+  position: relative;
+  margin-top: auto;
+}
+
+.footer p {
+  margin: 6px 0;
+}
+
+.footer b {
+  color: #ffe66d;
+}
+
+.footer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 2px;
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 768px) {
+  .header-inner {
+    flex-direction: column;
+    text-align: center;
+    gap: 10px;
+    padding: 15px 20px;
+  }
+
+  .header-nav {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+  }
+
+  .header h1 {
+    font-size: 18px;
+  }
+
+  main {
+    padding: 20px;
+    margin: 20px;
+  }
+
+  .footer {
+    font-size: 13px;
+    padding: 18px 8px;
+  }
+}
+
+/* === PAGE STRUCTURE (footer dính đáy) === */
+html, body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: #f8f9fb;
+  font-family: "Segoe UI", sans-serif;
+}
+
+main {
+  flex: 1;
+}
+
+/* === VIDEO LIST === */
+.video-list {
+  padding: 10px 0;
+}
+
+/* ===== HEADER PHẦN DANH SÁCH ===== */
+.list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.list-header h2 {
+  font-size: 24px;
+  font-weight: 600;
+  color: #0062ff;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* ===== THANH TÌM KIẾM VÀ NÚT THÊM ===== */
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  border: 1.5px solid #cfd8dc;
+  border-radius: 30px;
+  overflow: hidden;
+  background: #fff;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.search-bar input {
+  border: none;
+  padding: 8px 12px;
+  outline: none;
+  width: 220px;
+  font-size: 14px;
+}
+
+.search-bar button {
+  background: linear-gradient(90deg, #0062ff, #00b4d8);
+  color: #fff;
+  border: none;
+  padding: 8px 14px;
+  cursor: pointer;
+  transition: background 0.25s;
+  font-weight: 600;
+}
+
+.search-bar button:hover {
+  background: linear-gradient(90deg, #0055d4, #0094be);
+}
+
+/* ===== NÚT THÊM MỚI ===== */
+.btn-add {
+  background: linear-gradient(90deg, #00b4d8, #0096c7);
+  color: white;
+  text-decoration: none;
+  padding: 8px 16px;
+  border-radius: 25px;
+  font-weight: 500;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+  transition: all 0.25s;
+}
+
+.btn-add:hover {
+  background: linear-gradient(90deg, #0096c7, #0077b6);
+  transform: translateY(-1px);
+}
+
+/* ===== BẢNG DANH SÁCH VIDEO ===== */
+.video-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07);
+}
+
+.video-table th {
+  background: linear-gradient(90deg, #0062ff, #00b4d8);
+  color: #fff;
+  text-align: left;
+  padding: 12px 10px;
+  font-weight: 600;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.video-table td {
+  padding: 10px;
+  border-bottom: 1px solid #e0e0e0;
+  vertical-align: middle;
+  color: #333;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.video-table tr:last-child td {
+  border-bottom: none;
+}
+
+.video-table tr:hover {
+  background: #f8faff;
+  transition: background 0.2s;
+}
+
+/* ===== CỘT LIÊN KẾT ===== */
+.btn-link {
+  background: #0d6efd;
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 20px;
+  text-decoration: none;
+  transition: 0.25s;
+}
+
+.btn-link:hover {
+  background: #0056d2;
+}
+
+/* === VIDEO FORM === */
+.video-form {
+  max-width: 700px;
+  margin: 30px auto;
+  background: #fff;
+  padding: 40px 50px;
+  border-radius: 16px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Header form */
+.form-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.form-header h2 {
+  color: #0062ff;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.btn-back {
+  text-decoration: none;
+  color: #0077b6;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.btn-back:hover {
+  color: #023e8a;
+}
+
+/* Nhóm input */
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #333;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  outline: none;
+  font-size: 15px;
+  transition: 0.2s;
+  background: #fdfdfd;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  border-color: #00b4d8;
+  box-shadow: 0 0 4px rgba(0, 180, 216, 0.4);
+}
+
+/* Action buttons */
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+  margin-top: 30px;
+}
+
+.btn-save {
+  background: linear-gradient(90deg, #00b4d8, #0096c7);
+  color: #fff;
+  padding: 10px 22px;
+  border-radius: 8px;
+  border: none;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.btn-save:hover {
+  background: linear-gradient(90deg, #0096c7, #0077b6);
+  transform: translateY(-1px);
+}
+
+.btn-cancel {
+  text-decoration: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  background: #f1f3f5;
+  color: #333;
+  font-weight: 500;
+  border: 1px solid #ccc;
+  transition: 0.25s;
+}
+
+.btn-cancel:hover {
+  background: #e9ecef;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .video-form {
+    padding: 25px 20px;
+  }
+  .form-actions {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .btn-save, .btn-cancel {
+    width: 100%;
+    text-align: center;
+  }
+}
